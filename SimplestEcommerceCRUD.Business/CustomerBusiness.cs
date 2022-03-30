@@ -53,7 +53,7 @@ namespace SimplestEcommerceCRUD.Business
             }
             catch (Exception)
             {
-                return new ResponseVo("Customer not saved", "Database problem");
+                return new ResponseVo("Error getting costumer data", "Database problem");
             }
         }
 
@@ -67,7 +67,7 @@ namespace SimplestEcommerceCRUD.Business
             }
             catch (Exception)
             {
-                return new ResponseVo("Customer not saved", "Database problem");
+                return new ResponseVo("Error getting most purchased", "Database problem");
             }
         }
 

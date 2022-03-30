@@ -41,18 +41,19 @@ namespace SimplestEcommerceCRUD.Repository
             Customer customer = GetCustomer(customerId);
             if (customer == null) return null;
 
-            List<int> customerPurchases = _ecommerceContext.Purchases.Where(x => x.Id == customerId).Select(x => x.Id).ToList();
-            //List<ItemPurchase> customerItemPurchases = _ecommerceContext.ItemPurchases.Where(x => customerPurchases.Contains(x.Purchase.Id)).ToList();
+            List<int> customerPurchases = _ecommerceContext.Purchases.Where(x => x.CustomerId == customerId).Select(x => x.Id ).ToList();
+
             var customerItemPurchases =
                 _ecommerceContext.ItemPurchases
-                    .Where(x => customerPurchases.Contains(x.Purchase.Id))
+                    .Where(x => customerPurchases.Contains(x.PurchaseId)) // Pode tá errado
                     .GroupBy(x => x.ProductId)
                     .Select(x => new
                     {
                         ProductId = x.Key,
-                        Count = x.Count(),
+                        Count = x.Sum(s => s.Quantity),
                     })
-                    .ToList();
+                    .OrderByDescending(x => x.Count)
+                    .Take(5);
 
             return customerItemPurchases;
 
@@ -61,7 +62,7 @@ namespace SimplestEcommerceCRUD.Repository
         public Customer UpdateCustomer(JsonPatchDocument customer, int customerId)
         {
             Customer currentCustomer = GetCustomer(customerId);
-            if(currentCustomer == null) return null;
+            if (currentCustomer == null) return null;
 
             customer.ApplyTo(currentCustomer);
             _ecommerceContext.SaveChanges();
