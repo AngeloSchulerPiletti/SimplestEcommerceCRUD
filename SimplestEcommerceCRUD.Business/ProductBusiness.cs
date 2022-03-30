@@ -1,5 +1,6 @@
 ﻿using SimplestEcommerceCRUD.Business.Interfaces;
 using SimplestEcommerceCRUD.Domain.Entities;
+using SimplestEcommerceCRUD.Domain.Objects.DTO;
 using SimplestEcommerceCRUD.Domain.Objects.VO;
 using SimplestEcommerceCRUD.Repository.Interfaces;
 
@@ -38,15 +39,37 @@ namespace SimplestEcommerceCRUD.Business
             }
             catch (Exception)
             {
-                return new ResponseVo("Product not saved", "Database problem");
+                return new ResponseVo("Product not deleted", "Database problem");
             }
         }
 
         public ResponseVo GetProduct(int productId)
         {
-            Product product = _repository.GetProduct(productId);
-            if (product == null) return new ResponseVo("Product not found", $"The product of id {productId} were not found");
-            return new ResponseBagVo<Product>(product, "Product found", "The product were found succesfully", false);
+            try
+            {
+                Product product = _repository.GetProduct(productId);
+                if (product == null) return new ResponseVo("Product not found", $"The product of id {productId} were not found");
+                return new ResponseBagVo<Product>(product, "Product found", "The product were found succesfully", false);
+            }
+            catch (Exception)
+            {
+                return new ResponseVo("Product not found", "Database problem");
+            }
+        }
+
+        public ResponseVo GetProductPurchases(int productId)
+        {
+            try
+            {
+                ProductPurchasesDto productPurchasesDto = _repository.GetProductPurchases(productId);
+                if (productPurchasesDto == null) return new ResponseVo("Product's purchases search failed", "Couldn't find any purchases for this product");
+                return new ResponseBagVo<ProductPurchasesDto>(productPurchasesDto, "Product's purchases found", "The product's purchases were found", false);
+            }
+            catch (Exception)
+            {
+                return new ResponseVo("Product's purchases not found", "Database problem");
+            }
+
         }
     }
 }

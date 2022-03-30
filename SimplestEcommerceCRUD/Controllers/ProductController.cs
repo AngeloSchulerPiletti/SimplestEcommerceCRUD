@@ -25,6 +25,14 @@ namespace SimplestEcommerceCRUD.Controllers
             return response.IsError ? BadRequest(response) : Ok(response);
         }
 
+        [HttpGet]
+        [Route("purchases/{productId}")]
+        public IActionResult GetProductPurchases(int productId)
+        {
+            ResponseVo response = _business.GetProductPurchases(productId);
+            return response.IsError ? BadRequest(response) : Ok(response);
+        }
+
         [HttpPost]
         [Route("new")]
         public IActionResult CreateProduct([FromBody] Product product)

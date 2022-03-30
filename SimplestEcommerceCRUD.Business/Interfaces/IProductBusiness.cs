@@ -8,5 +8,6 @@ namespace SimplestEcommerceCRUD.Business.Interfaces
         public ResponseVo CreateProduct(Product product);
         public ResponseVo DeleteProduct(int productId);
         public ResponseVo GetProduct(int productId);
+        public ResponseVo GetProductPurchases(int productId);
     }
 }

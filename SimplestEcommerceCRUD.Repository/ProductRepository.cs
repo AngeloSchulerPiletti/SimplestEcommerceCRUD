@@ -1,4 +1,5 @@
 ﻿using SimplestEcommerceCRUD.Domain.Entities;
+using SimplestEcommerceCRUD.Domain.Objects.DTO;
 using SimplestEcommerceCRUD.Repository.Database.Context;
 using SimplestEcommerceCRUD.Repository.Interfaces;
 
@@ -33,6 +34,29 @@ namespace SimplestEcommerceCRUD.Repository
         public Product GetProduct(int productId)
         {
             return _ecommerceContext.Products.FirstOrDefault(x => x.Id == productId);
+        }
+
+        public ProductPurchasesDto GetProductPurchases(int productId)
+        {
+            Product product = _ecommerceContext.Products.Find(productId);
+
+            List<PurchaseItemDto> purchaseItemDtos = _ecommerceContext.ItemPurchases
+                .Where(x => x.ProductId == productId)
+                .Select(x => new PurchaseItemDto(x.Product, x.Quantity, x.PurchaseId))
+                .ToList();
+
+            if (purchaseItemDtos.Count == 0) return null;
+
+            ProductPurchasesDto productPurchases = new(product);
+
+            foreach (PurchaseItemDto purchaseItemDto in purchaseItemDtos)
+            {
+                productPurchases.Quantity += purchaseItemDto.Quantity;
+            }
+
+            productPurchases.CalculateTotal();
+
+            return productPurchases;
         }
     }
 }
