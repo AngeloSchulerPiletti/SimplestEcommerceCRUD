@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using SimplestEcommerceCRUD.Business.Interfaces;
 using SimplestEcommerceCRUD.Domain.Entities;
 using SimplestEcommerceCRUD.Domain.Objects.VO;
@@ -34,19 +35,19 @@ namespace SimplestEcommerceCRUD.Controllers
         }
 
         [HttpPatch]
-        [Route("update")]
-        public IActionResult UpdateCustomer([FromBody] Customer customer)
+        [Route("update/{customerId}")]
+        public IActionResult UpdateCustomer([FromBody] JsonPatchDocument customer, int customerId)
         {
-
-            return Ok();
+            ResponseVo response = _business.UpdateCustomer(customer, customerId);
+            return response.IsError ? BadRequest(response) : Ok(response);
         }
 
         [HttpDelete]
         [Route("delete/{customerId}")]
         public IActionResult DeleteCustomer(int customerId)
         {
-
-            return Ok();
+            ResponseVo response = _business.DeleteCustomer(customerId);
+            return response.IsError ? BadRequest(response) : Ok(response);
         }
     }
 }

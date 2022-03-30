@@ -1,5 +1,5 @@
-﻿using SimplestEcommerceCRUD.Domain.Entities;
-using SimplestEcommerceCRUD.Domain.Objects.VO;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using SimplestEcommerceCRUD.Domain.Entities;
 using SimplestEcommerceCRUD.Repository.Database.Context;
 using SimplestEcommerceCRUD.Repository.Interfaces;
 
@@ -21,9 +21,29 @@ namespace SimplestEcommerceCRUD.Repository
             return customer;
         }
 
+        public bool DeleteCustomer(int customerId)
+        {
+            Customer customer = GetCustomer(customerId);
+            if (customer == null) return false;
+
+            _ecommerceContext.Customers.Remove(customer);
+            _ecommerceContext.SaveChanges();
+            return true;
+        }
+
         public Customer GetCustomer(int customerId)
         {
-            return _ecommerceContext.Customers.FirstOrDefault(x => x.Id == customerId);
+            return _ecommerceContext.Customers.Find(customerId);
+        }
+
+        public Customer UpdateCustomer(JsonPatchDocument customer, int customerId)
+        {
+            Customer currentCustomer = GetCustomer(customerId);
+            if(currentCustomer == null) return null;
+
+            customer.ApplyTo(currentCustomer);
+            _ecommerceContext.SaveChanges();
+            return currentCustomer;
         }
     }
 }

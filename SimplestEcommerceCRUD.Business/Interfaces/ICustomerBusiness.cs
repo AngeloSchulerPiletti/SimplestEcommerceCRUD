@@ -1,11 +1,14 @@
-﻿using SimplestEcommerceCRUD.Domain.Entities;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using SimplestEcommerceCRUD.Domain.Entities;
 using SimplestEcommerceCRUD.Domain.Objects.VO;
 
 namespace SimplestEcommerceCRUD.Business.Interfaces
 {
     public interface ICustomerBusiness
     {
-        public ResponseVo GetCustomer(int customerId);
         public ResponseVo CreateCustomer(Customer customer);
+        public ResponseVo DeleteCustomer(int customerId);
+        public ResponseVo GetCustomer(int customerId);
+        public ResponseVo UpdateCustomer(JsonPatchDocument customer, int customerId);
     }
 }
