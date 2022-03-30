@@ -18,6 +18,9 @@ builder.Services.AddScoped<ICustomerBusiness, CustomerBusiness>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductBusiness, ProductBusiness>();
 
+builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+builder.Services.AddScoped<IPurchaseBusiness, PurchaseBusiness>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
