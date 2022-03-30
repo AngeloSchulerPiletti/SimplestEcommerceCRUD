@@ -29,8 +29,8 @@ namespace SimplestEcommerceCRUD.Controllers
         [Route("new")]
         public IActionResult CreateCustomer([FromBody] Customer customer)
         {
-
-            return Ok();
+            ResponseVo response = _business.CreateCustomer(customer);
+            return response.IsError ? BadRequest(response) : Ok(response);
         }
 
         [HttpPatch]

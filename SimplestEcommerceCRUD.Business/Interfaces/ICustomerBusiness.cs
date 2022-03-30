@@ -6,5 +6,6 @@ namespace SimplestEcommerceCRUD.Business.Interfaces
     public interface ICustomerBusiness
     {
         public ResponseVo GetCustomer(int customerId);
+        public ResponseVo CreateCustomer(Customer customer);
     }
 }
