@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SimplestEcommerceCRUD.Business.Interfaces;
 using SimplestEcommerceCRUD.Domain.Entities;
+using SimplestEcommerceCRUD.Domain.Objects.VO;
 
 namespace SimplestEcommerceCRUD.Controllers
 {
@@ -8,12 +10,19 @@ namespace SimplestEcommerceCRUD.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly IProductBusiness _business;
+
+        public ProductController(IProductBusiness business)
+        {
+            _business = business;
+        }
+
         [HttpGet]
         [Route("{productId}")]
         public IActionResult GetProduct(int productId)
         {
-
-            return Ok();
+            ResponseVo response = _business.GetProduct(productId);
+            return response.IsError ? BadRequest(response) : Ok(response);
         }
 
         [HttpPost]

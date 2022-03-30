@@ -15,6 +15,9 @@ builder.Services.AddDbContext<EcommerceContext>(options => options.UseSqlServer(
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerBusiness, CustomerBusiness>();
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductBusiness, ProductBusiness>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
