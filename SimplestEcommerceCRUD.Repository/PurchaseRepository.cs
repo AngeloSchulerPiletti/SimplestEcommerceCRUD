@@ -17,5 +17,22 @@ namespace SimplestEcommerceCRUD.Repository
         {
             return _ecommerceContext.Purchases.FirstOrDefault(x => x.Id == purchaseId);
         }
+
+        public Purchase CreatePurchase(Purchase purchase)
+        {
+            _ecommerceContext.Purchases.Add(purchase);
+            _ecommerceContext.SaveChanges();
+            return purchase;
+        }
+
+        public bool DeletePurchase(int purchaseId)
+        {
+            Purchase purchase = GetPurchase(purchaseId);
+            if (purchase == null) return false;
+
+            _ecommerceContext.Purchases.Remove(purchase);
+            _ecommerceContext.SaveChanges();
+            return true;
+        }
     }
 }
