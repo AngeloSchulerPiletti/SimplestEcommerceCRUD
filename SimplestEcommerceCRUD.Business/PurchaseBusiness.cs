@@ -1,5 +1,6 @@
 ﻿using SimplestEcommerceCRUD.Business.Interfaces;
 using SimplestEcommerceCRUD.Domain.Entities;
+using SimplestEcommerceCRUD.Domain.Objects.DTO;
 using SimplestEcommerceCRUD.Domain.Objects.VO;
 using SimplestEcommerceCRUD.Repository.Interfaces;
 
@@ -18,9 +19,9 @@ namespace SimplestEcommerceCRUD.Business
         {
             try
             {
-                Purchase savedPurchase = _repository.CreatePurchase(purchase);
+                PurchaseOrderDto savedPurchase = _repository.CreatePurchase(purchase);
                 if (savedPurchase == null) return new ResponseVo("Purchase not saved", "The purchase could not be saved");
-                return new ResponseBagVo<Purchase>(savedPurchase, "Purchase saved", "The purchase was saved succesfully", false);
+                return new ResponseBagVo<PurchaseOrderDto>(savedPurchase, "Purchase saved", "The purchase was saved succesfully", false);
             }
             catch (Exception)
             {
