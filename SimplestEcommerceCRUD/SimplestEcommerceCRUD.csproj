@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SimplestEcommerceCRUD.Business\SimplestEcommerceCRUD.Business.csproj" />
     <ProjectReference Include="..\SimplestEcommerceCRUD.Repository\SimplestEcommerceCRUD.Repository.csproj" />
   </ItemGroup>
 

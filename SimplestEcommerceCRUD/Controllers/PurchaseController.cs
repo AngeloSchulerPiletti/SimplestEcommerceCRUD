@@ -10,7 +10,7 @@ namespace SimplestEcommerceCRUD.Controllers
     {
         [HttpGet]
         [Route("{purchaseId}")]
-        public IActionResult GetPurchase([FromQuery] int purchaseId)
+        public IActionResult GetPurchase(int purchaseId)
         {
 
             return Ok();
@@ -34,7 +34,7 @@ namespace SimplestEcommerceCRUD.Controllers
 
         [HttpDelete]
         [Route("delete/{purchaseId}")]
-        public IActionResult DeletePurchase([FromQuery] int purchaseId)
+        public IActionResult DeletePurchase(int purchaseId)
         {
 
             return Ok();

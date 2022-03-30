@@ -3,8 +3,8 @@
     public class Purchase
     {
         public int Id { get; set; }
-        public int CostumerId { get; set; }
-        public virtual Costumer Costumer { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
         public virtual List<ItemPurchase> ItemPurchases { get; set; }
     }
 }

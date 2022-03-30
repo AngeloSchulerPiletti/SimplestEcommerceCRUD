@@ -9,7 +9,7 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Costumers",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,7 +20,7 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Costumers", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,15 +43,15 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CostumerId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Purchases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Purchases_Costumers_CostumerId",
-                        column: x => x.CostumerId,
-                        principalTable: "Costumers",
+                        name: "FK_Purchases_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -94,9 +94,9 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
                 column: "PurchaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchases_CostumerId",
+                name: "IX_Purchases_CustomerId",
                 table: "Purchases",
-                column: "CostumerId");
+                column: "CustomerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -111,7 +111,7 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
                 name: "Purchases");
 
             migrationBuilder.DropTable(
-                name: "Costumers");
+                name: "Customers");
         }
     }
 }

@@ -4,9 +4,9 @@ using SimplestEcommerceCRUD.Domain.Entities;
 
 namespace SimplestEcommerceCRUD.Repository.Database.Mapper
 {
-    public class CostumerMap : IEntityTypeConfiguration<Costumer>
+    public class CustomerMap : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Costumer> builder)
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.Property(x => x.Id)
                 .IsRequired();

@@ -1,6 +1,6 @@
 ﻿namespace SimplestEcommerceCRUD.Domain.Entities
 {
-    public class Costumer
+    public class Customer
     {
         public int Id { get; set; }
         public string Name { get; set; }

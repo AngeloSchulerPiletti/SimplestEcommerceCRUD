@@ -21,7 +21,7 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SimplestEcommerceCRUD.Domain.Entities.Costumer", b =>
+            modelBuilder.Entity("SimplestEcommerceCRUD.Domain.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Costumers");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("SimplestEcommerceCRUD.Domain.Entities.ItemPurchase", b =>
@@ -104,12 +104,12 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CostumerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CostumerId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Purchases");
                 });
@@ -135,16 +135,16 @@ namespace SimplestEcommerceCRUD.Repository.Migrations
 
             modelBuilder.Entity("SimplestEcommerceCRUD.Domain.Entities.Purchase", b =>
                 {
-                    b.HasOne("SimplestEcommerceCRUD.Domain.Entities.Costumer", "Costumer")
+                    b.HasOne("SimplestEcommerceCRUD.Domain.Entities.Customer", "Customer")
                         .WithMany("Purchases")
-                        .HasForeignKey("CostumerId")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Costumer");
+                    b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("SimplestEcommerceCRUD.Domain.Entities.Costumer", b =>
+            modelBuilder.Entity("SimplestEcommerceCRUD.Domain.Entities.Customer", b =>
                 {
                     b.Navigation("Purchases");
                 });

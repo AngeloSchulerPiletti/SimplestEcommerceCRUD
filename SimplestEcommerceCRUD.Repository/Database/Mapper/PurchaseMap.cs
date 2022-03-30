@@ -11,15 +11,15 @@ namespace SimplestEcommerceCRUD.Repository.Database.Mapper
             builder.Property(x => x.Id)
                 .IsRequired();
 
-            builder.Property(x => x.CostumerId)
+            builder.Property(x => x.CustomerId)
                 .IsRequired();
 
             builder.HasKey(x => x.Id);
 
             builder
-                .HasOne(x => x.Costumer)
+                .HasOne(x => x.Customer)
                 .WithMany(x => x.Purchases)
-                .HasForeignKey(x => x.CostumerId);
+                .HasForeignKey(x => x.CustomerId);
         }
     }
 }
