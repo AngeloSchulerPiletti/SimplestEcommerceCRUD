@@ -34,6 +34,14 @@ namespace SimplestEcommerceCRUD.Controllers
             return response.IsError ? BadRequest(response) : Ok(response);
         }
 
+        [HttpGet]
+        [Route("purchases/{customerId}")]
+        public IActionResult GetCustomerPurchases(int customerId)
+        {
+            ResponseVo response = _business.GetCustomerPurchases(customerId);
+            return response.IsError ? BadRequest(response) : Ok(response);
+        }
+
         [HttpPost]
         [Route("new")]
         public IActionResult CreateCustomer([FromBody] Customer customer)

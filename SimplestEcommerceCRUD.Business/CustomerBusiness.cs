@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using SimplestEcommerceCRUD.Business.Interfaces;
 using SimplestEcommerceCRUD.Domain.Entities;
+using SimplestEcommerceCRUD.Domain.Objects.DTO;
 using SimplestEcommerceCRUD.Domain.Objects.VO;
 using SimplestEcommerceCRUD.Repository.Interfaces;
 
@@ -54,6 +55,20 @@ namespace SimplestEcommerceCRUD.Business
             catch (Exception)
             {
                 return new ResponseVo("Error getting costumer data", "Database problem");
+            }
+        }
+
+        public ResponseVo GetCustomerPurchases(int customerId)
+        {
+            try
+            {
+                PurchaseOrderGroupDto purchaseOrderGroupDto = _repository.GetCustomerPurchases(customerId);
+                if (purchaseOrderGroupDto == null) return new ResponseVo("Customer purchases not found", $"The customer of id {customerId} has no purchases");
+                return new ResponseBagVo<PurchaseOrderGroupDto>(purchaseOrderGroupDto, "Customer purchases found", "The customer's purchases was found succesfully", false);
+            }
+            catch (Exception)
+            {
+                return new ResponseVo("Error getting costumer purchases", "Database problem");
             }
         }
 
