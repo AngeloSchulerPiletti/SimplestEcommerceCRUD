@@ -26,6 +26,14 @@ namespace SimplestEcommerceCRUD.Controllers
             return response.IsError ? BadRequest(response) : Ok(response);
         }
 
+        [HttpGet]
+        [Route("most-purchased/{customerId}")]
+        public IActionResult GetMostPurchasedProductsByClient(int customerId)
+        {
+            ResponseVo response = _business.GetMostPurchasedProductsByClient(customerId);
+            return response.IsError ? BadRequest(response) : Ok(response);
+        }
+
         [HttpPost]
         [Route("new")]
         public IActionResult CreateCustomer([FromBody] Customer customer)

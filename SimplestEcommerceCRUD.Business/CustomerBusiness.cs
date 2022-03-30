@@ -57,6 +57,20 @@ namespace SimplestEcommerceCRUD.Business
             }
         }
 
+        public ResponseVo GetMostPurchasedProductsByClient(int customerId)
+        {
+            try
+            {
+                object mostPurchasedList = _repository.GetMostPurchasedProductsByClient(customerId);
+                if (mostPurchasedList == null) return new ResponseVo("Couldn't resolve", $"Couldn't find most purchased items of customer {customerId}");
+                return new ResponseBagVo<object>(mostPurchasedList, "Most purchased items found", "The customer's most purchased items were found succesfully", false);
+            }
+            catch (Exception)
+            {
+                return new ResponseVo("Customer not saved", "Database problem");
+            }
+        }
+
         public ResponseVo UpdateCustomer(JsonPatchDocument customer, int customerId)
         {
             try

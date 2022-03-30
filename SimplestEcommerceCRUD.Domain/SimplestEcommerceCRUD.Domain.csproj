@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Objects\DTO\" />
+  </ItemGroup>
+
 </Project>

@@ -29,8 +29,8 @@ namespace SimplestEcommerceCRUD.Controllers
         [Route("new")]
         public IActionResult CreateProduct([FromBody] Product product)
         {
-
-            return Ok();
+            ResponseVo response = _business.CreateProduct(product);
+            return response.IsError ? BadRequest(response) : Ok(response);
         }
 
         [HttpPatch]
@@ -45,8 +45,8 @@ namespace SimplestEcommerceCRUD.Controllers
         [Route("delete/{productId}")]
         public IActionResult DeleteProduct(int productId)
         {
-
-            return Ok();
+            ResponseVo response = _business.DeleteProduct(productId);
+            return response.IsError ? BadRequest(response) : Ok(response);
         }
     }
 }

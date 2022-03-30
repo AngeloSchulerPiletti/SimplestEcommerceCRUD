@@ -7,7 +7,8 @@ namespace SimplestEcommerceCRUD.Repository.Interfaces
     {
         public Customer CreateCustomer(Customer customer);
         public bool DeleteCustomer(int customerId);
-        public Customer GetCustomer(int customerId);
+        public Customer GetCustomer(int customerId); 
+        public object GetMostPurchasedProductsByClient(int customerId);
         public Customer UpdateCustomer(JsonPatchDocument customer, int customerId);
     }
 }
