@@ -69,7 +69,7 @@ namespace SimplestEcommerceCRUD.Repository
 
             var customerItemPurchases =
                 _ecommerceContext.ItemPurchases
-                    .Where(x => customerPurchases.Contains(x.PurchaseId)) // Pode tá errado
+                    .Where(x => customerPurchases.Contains(x.PurchaseId))
                     .GroupBy(x => x.ProductId)
                     .Select(x => new
                     {

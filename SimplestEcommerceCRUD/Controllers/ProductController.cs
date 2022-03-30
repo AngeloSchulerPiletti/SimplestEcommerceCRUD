@@ -26,6 +26,14 @@ namespace SimplestEcommerceCRUD.Controllers
         }
 
         [HttpGet]
+        [Route("purchases/")]
+        public IActionResult GetProductPurchases()
+        {
+            ResponseVo response = _business.GetProductPurchases();
+            return response.IsError ? BadRequest(response) : Ok(response);
+        }
+
+        [HttpGet]
         [Route("purchases/{productId}")]
         public IActionResult GetProductPurchases(int productId)
         {

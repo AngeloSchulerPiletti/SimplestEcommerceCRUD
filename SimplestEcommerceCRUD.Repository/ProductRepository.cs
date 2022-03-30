@@ -33,12 +33,12 @@ namespace SimplestEcommerceCRUD.Repository
 
         public Product GetProduct(int productId)
         {
-            return _ecommerceContext.Products.FirstOrDefault(x => x.Id == productId);
+            return _ecommerceContext.Products.Find(productId);
         }
 
         public ProductPurchasesDto GetProductPurchases(int productId)
         {
-            Product product = _ecommerceContext.Products.Find(productId);
+            Product product = GetProduct(productId);
 
             List<PurchaseItemDto> purchaseItemDtos = _ecommerceContext.ItemPurchases
                 .Where(x => x.ProductId == productId)
@@ -57,6 +57,31 @@ namespace SimplestEcommerceCRUD.Repository
             productPurchases.CalculateTotal();
 
             return productPurchases;
+        }
+
+        public List<ProductPurchasesDto> GetProductPurchases()
+        {
+            List<int> productIds = _ecommerceContext.Products.OrderByDescending(x => x.Id).Select(x => x.Id).ToList();
+
+            if (productIds.Count == 0) return null;
+
+            List<ProductPurchasesDto> purchaseItemDtos = new();
+
+            foreach (int productId in productIds)
+            {
+                Product product = GetProduct(productId);
+
+                ProductPurchasesDto productPurchasesDto = _ecommerceContext.ItemPurchases
+                    .Where(x => x.ProductId == productId)
+                    .GroupBy(x => x.ProductId)
+                    .Select(x => new ProductPurchasesDto(product, x.Sum(x => x.Quantity), (int)(x.Sum(x => x.Quantity) * product.Price)))
+                    .First();
+
+                purchaseItemDtos.Add(productPurchasesDto);
+            }
+
+            return purchaseItemDtos;
+
         }
     }
 }

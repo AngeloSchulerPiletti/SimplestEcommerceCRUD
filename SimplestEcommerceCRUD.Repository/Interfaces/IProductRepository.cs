@@ -9,5 +9,6 @@ namespace SimplestEcommerceCRUD.Repository.Interfaces
         public bool DeleteProduct(int productId);
         public Product GetProduct(int productId);
         public ProductPurchasesDto GetProductPurchases(int productId);
+        public List<ProductPurchasesDto> GetProductPurchases();
     }
 }

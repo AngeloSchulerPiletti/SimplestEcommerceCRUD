@@ -71,5 +71,19 @@ namespace SimplestEcommerceCRUD.Business
             }
 
         }
+
+        public ResponseVo GetProductPurchases()
+        {
+            try
+            {
+                List<ProductPurchasesDto> productPurchasesDto = _repository.GetProductPurchases();
+                if (productPurchasesDto == null || productPurchasesDto.Count == 0) return new ResponseVo("Products' purchases search failed", "Couldn't find any purchases for these product");
+                return new ResponseBagVo<List<ProductPurchasesDto>>(productPurchasesDto, "Products' purchases found", "The products' purchases were found", false);
+            }
+            catch (Exception)
+            {
+                return new ResponseVo("Products' purchases not found", "Database problem");
+            }
+        }
     }
 }
